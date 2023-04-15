@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 OBJS = mm.o
 
@@ -8,8 +8,6 @@ EXE = mm
 
 all: $(OBJS)
 	$(CC) $(CFLAGS) -o $(EXE) $(OBJS)
-
-$(OBJS): $(HDRS)
 
 mm.o: mm.c
 	$(CC) $(CFLAGS) -c mm.c

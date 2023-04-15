@@ -48,6 +48,15 @@ void mm_basic (int n, double* a, double* b, double* c)
 
 void mm_opt (int n, double* a, double* b, double* c, int bs)
 {
+    int i1, j1, k1, i2, j2, k2;
+
+    for (i1 = 0; i1 < n; i1 += bs)
+      for (j1 = 0 ; j1 < n; j1 += bs)
+        for (k1 = 0; k1 < n; k1 += bs)
+          for (i2 = i1; i2 < i1 + bs; i2++)
+            for (j2 = j1; j2 < j1 + bs; j2++)
+              for (k2 = k1; k2 < k1 + bs; k2++)
+                a[i2 * n + k2] += b[i2 * n + j2] * c[j2 * n + k2];
 }
 
 void checkmm (int n, double* a, double* aa)
@@ -104,4 +113,9 @@ int main (int argc, char *argv[])
   MEASURE_TIME ( mm_opt (n, a, b, c, bs) );
 
   checkmm (n, a, aa) ;
+
+  free(a);
+  free(b);
+  free(c);
+  free(aa);
 }
